@@ -1,0 +1,6 @@
+node_moudles/
+coverage/
+logs/
+drizzle/
+*.logs
+package-lock.json
