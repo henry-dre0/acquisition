@@ -1,4 +1,7 @@
 node_modules
 .env
+.env.production
 Logs/
 git-filter-repo/
+.neon_local/
+

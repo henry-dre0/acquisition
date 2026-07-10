@@ -1,0 +1,31 @@
+services:
+  neon-local:
+    image: neondatabase/neon_local:latest
+    ports:
+      - "5432:5432"
+    environment:
+      NEON_API_KEY: ${NEON_API_KEY}
+      NEON_PROJECT_ID: ${NEON_PROJECT_ID}
+      PARENT_BRANCH_ID: ${PARENT_BRANCH_ID}
+    env_file:
+      - .env.development
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgres://neon:npg@neon-local:5432/neondb?sslmode=require
+      NEON_FETCH_ENDPOINT: http://neon-local:5432/sql
+      ARCJET_KEY: ${ARCJET_KEY}
+    env_file:
+      - .env.development
+    depends_on:
+      - neon-local
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: node --watch src/index.js
