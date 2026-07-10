@@ -1,3 +1,11 @@
+// ─────────────────────────────────────────────
+//  COOKIES — httpOnly cookie helpers
+// ─────────────────────────────────────────────
+//  All cookies are httpOnly, sameSite: strict.
+//  secure flag auto-enables in production.
+//  Default maxAge is 15 minutes.
+// ─────────────────────────────────────────────
+
 export const cookies = {
     getOptions: () => ({
         httpOnly: true,
@@ -19,7 +27,3 @@ export const cookies = {
         return req.cookies[name];
     }
 };
-
-
-
-//auth.validation.js

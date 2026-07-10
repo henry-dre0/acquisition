@@ -1,3 +1,10 @@
+# ─────────────────────────────────────────────
+#  DOCKERIGNORE — files excluded from Docker build
+# ─────────────────────────────────────────────
+#  Keeps the image small and avoids leaking
+#  secrets. Add any local-only files here.
+# ─────────────────────────────────────────────
+
 node_modules
 .git
 .gitignore

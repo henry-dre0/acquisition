@@ -1,7 +1,7 @@
 {
   "name": "acquisition",
   "version": "1.0.0",
-  "description": "",
+  "description": "DRE API — Express.js auth backend with Neon Postgres, Drizzle ORM, Arcjet security",
   "main": "index.js",
   "imports": {
     "#config/*": "./src/config/*",
@@ -15,6 +15,8 @@
   },
   "scripts": {
     "dev": "node --watch src/index.js",
+    "start": "node src/index.js",
+    "start": "node src/index.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",

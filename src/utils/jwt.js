@@ -1,3 +1,13 @@
+// ─────────────────────────────────────────────
+//  JWT — token signing & verification
+// ─────────────────────────────────────────────
+//  🔧 IMPORTANT: Change JWT_SECRET in production!
+//     Set JWT_SECRET in your .env file.
+//     The fallback below is for dev only.
+//
+//  Tokens expire in 1 day (JWT_EXPIRES_IN).
+// ─────────────────────────────────────────────
+
 import logger from '#config/logger.js';
 import jwt from 'jsonwebtoken';
 

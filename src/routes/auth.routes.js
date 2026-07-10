@@ -1,15 +1,16 @@
+// ─────────────────────────────────────────────
+//  AUTH ROUTES — maps HTTP verbs + paths to
+//                controller functions
+// ─────────────────────────────────────────────
+//  Mounted at /api/auth in App.js.
+//  🔧 Add a new route here when you create
+//     a new controller handler.
+// ─────────────────────────────────────────────
+
 import express from 'express';
 import {signup, signin, signout} from '#controllers/auth.controller.js';
 
 const router = express.Router();
-
-
-//NOTE: we no longer need this new once below
-//router.post('/sign-up' , (req, res) => {
-  // Handle user sign-up logic here
- // res.send('POST /api/auth/sign-up response');
-//});
-
 
 router.post('/sign-up', signup);
 

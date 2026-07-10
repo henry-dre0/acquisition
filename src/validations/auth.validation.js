@@ -1,3 +1,14 @@
+// ─────────────────────────────────────────────
+//  AUTH VALIDATION — Zod schemas for request bodies
+// ─────────────────────────────────────────────
+//  Defines shapes & constraints for sign-up and
+//  sign-in payloads. Controllers use safeParse()
+//  to validate before touching the service layer.
+//
+//  🔧 TO DO: add password confirmation field
+//     to signupSchema if needed.
+// ─────────────────────────────────────────────
+
 import { z } from "zod";
 
 export const signupSchema = z.object({

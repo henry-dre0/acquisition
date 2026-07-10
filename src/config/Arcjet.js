@@ -1,34 +1,34 @@
+// ─────────────────────────────────────────────
+//  ARCJET — security & rate limiting config
+// ─────────────────────────────────────────────
+//  Defines three rules that run on every request:
+//    1. Shield — blocks SQL injection & common attacks
+//    2. detectBot — blocks automated traffic
+//    3. slidingWindow — rate limits (5 req / 10s)
+//
+//  🔧 Requires ARCJET_KEY in your .env file.
+//     Get one at https://app.arcjet.com
+//
+//  🔧 Rules run in "LIVE" mode — they actively block.
+//     Switch to "DRY_RUN" to log-only during testing.
+// ─────────────────────────────────────────────
+
 import arcjet, { shield, detectBot, slidingWindow } from "@arcjet/node";
 
-
 const aj = arcjet({
-  // Get your site key from https://app.arcjet.com and set it as an environment
-  // variable rather than hard coding.
   key: process.env.ARCJET_KEY,
   rules: [
-    // Shield protects your app from common attacks e.g. SQL injection
     shield({ mode: "LIVE" }),
-    // Create a bot detection rule
     detectBot({
-      mode: "LIVE", // Blocks requests. Use "DRY_RUN" to log only
-      // Block all bots except the following
+      mode: "LIVE",
       allow: [
-        "CATEGORY:SEARCH_ENGINE", // Google, Bing, etc
-        // Uncomment to allow these other common bot categories
-        // See the full list at https://arcjet.com/bot-list
-        //"CATEGORY:MONITOR", // Uptime monitoring services
-        //"CATEGORY:PREVIEW", // Link previews e.g. Slack, Discord
+        "CATEGORY:SEARCH_ENGINE",
       ],
     }),
-    // Create a token bucket rate limit. Other algorithms are supported.
     slidingWindow({
       mode: "LIVE",
-      // Tracked by IP address by default, but this can be customized
-      // See https://docs.arcjet.com/fingerprints
-      //characteristics: ["ip.src"],
-      
       interval: '10s',
-      max: 5 // Max 5 requests per interval
+      max: 5,
     }),
   ],
 });

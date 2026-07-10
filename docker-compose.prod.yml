@@ -1,3 +1,21 @@
+# ─────────────────────────────────────────────
+#  DOCKER COMPOSE — production environment
+# ─────────────────────────────────────────────
+#  Runs only the app (no Neon Local — uses
+#  the real Neon Cloud database directly).
+#
+#  🔧 BEFORE FIRST RUN:
+#     1. Create .env.production from the
+#        .env.production.example template.
+#     2. Fill in DATABASE_URL with your real
+#        Neon Cloud connection string.
+#     3. Fill in ARCJET_KEY.
+#     4. Run: docker compose -f docker-compose.prod.yml up
+#
+#  ⚠️  .env.production is in .gitignore —
+#     it will NOT be committed. Keep it secret.
+# ─────────────────────────────────────────────
+
 services:
   app:
     build:

@@ -1,9 +1,20 @@
+// ─────────────────────────────────────────────
+//  AUTH SERVICE — business logic for auth
+// ─────────────────────────────────────────────
+//  Pure database operations & password hashing.
+//  Controllers call these, never call DB directly.
+//
+//  🔧 TO DO: add email verification flow,
+//     password reset, refresh tokens.
+// ─────────────────────────────────────────────
+
 import logger from "#config/logger.js";
 import bcrypt from 'bcrypt';
 import {eq} from 'drizzle-orm';
 import {db} from '#config/database.js';
 import {users} from '#models/user.module.js';
 
+/** Hash a plaintext password with bcrypt (10 rounds). */
 export const hashPassword = async (password) => {
     try {
         return await bcrypt.hash(password, 10);
@@ -14,6 +25,7 @@ export const hashPassword = async (password) => {
     }
 };
 
+/** Compare a plaintext password against a bcrypt hash. */
 export const comparePassword = async (password, hash) => {
     try {
         return await bcrypt.compare(password, hash);
@@ -23,6 +35,7 @@ export const comparePassword = async (password, hash) => {
     }
 };
 
+/** Find user by email, verify password. Throws on failure. */
 export const authenticateUser = async ({ email, password }) => {
     try {
         const [user] = await db.select().from(users).where(eq(users.email, email)).limit(1);
@@ -47,6 +60,7 @@ export const authenticateUser = async ({ email, password }) => {
     }
 };
 
+/** Create a new user. Throws if email already exists. */
 export const createUser = async ({name, email, password, role = 'user'}) => {
     try {
         const existingUser = await db.select().from(users).where(eq(users.email, email)).limit(1);

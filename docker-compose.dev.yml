@@ -1,3 +1,24 @@
+# ─────────────────────────────────────────────
+#  DOCKER COMPOSE — development environment
+# ─────────────────────────────────────────────
+#  Runs two services:
+#    1. neon-local  → proxy to Neon Cloud (ephemeral branch)
+#    2. app         → your Express app (hot-reload)
+#
+#  🔧 BEFORE FIRST RUN:
+#     1. Fill in .env.development with your
+#        NEON_API_KEY, NEON_PROJECT_ID, and
+#        PARENT_BRANCH_ID (from Neon Console).
+#     2. Run: docker compose -f docker-compose.dev.yml up
+#
+#  The app connects to Neon Local at
+#  postgres://neon:npg@neon-local:5432/neondb
+#  (user: neon, password: npg).
+#
+#  Source is mounted as a volume — edit files
+#  locally and the container auto-restarts.
+# ─────────────────────────────────────────────
+
 services:
   neon-local:
     image: neondatabase/neon_local:latest

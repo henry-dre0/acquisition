@@ -1,3 +1,16 @@
+// ─────────────────────────────────────────────
+//  EXPRESS APP — middleware stack & routes
+// ─────────────────────────────────────────────
+//  1. Security & parsing middleware (helmet, cors,
+//     json, cookies, morgan).
+//  2. Arcjet security/rate-limit middleware.
+//  3. Routes — mount new route files here.
+// ─────────────────────────────────────────────
+//  🔧 TO DO when adding a new feature:
+//     import the route file, then
+//     app.use('/api/your-path', yourRouter);
+// ─────────────────────────────────────────────
+
 import express from 'express';
 import logger from '#config/logger.js';
 import helmet from 'helmet';

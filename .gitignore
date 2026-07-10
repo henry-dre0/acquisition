@@ -1,7 +1,13 @@
+# ─────────────────────────────────────────────
+#  GITIGNORE — files Git should ignore
+# ─────────────────────────────────────────────
+#  🔧 Keep this up to date when adding new
+#     local-only files or generated folders.
+# ─────────────────────────────────────────────
+
 node_modules
 .env
 .env.production
 Logs/
 git-filter-repo/
 .neon_local/
-

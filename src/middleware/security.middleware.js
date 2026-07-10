@@ -1,3 +1,20 @@
+// ─────────────────────────────────────────────
+//  SECURITY MIDDLEWARE — Arcjet per-request rules
+// ─────────────────────────────────────────────
+//  Runs on every request. Checks:
+//    - Bot detection
+//    - Shield (SQL injection, etc.)
+//    - Rate limiting (varies by user role)
+//
+//  Rate limits (per minute):
+//    admin → 20  |  user → 10  |  guest → 5
+//
+//  🔧 Requires ARCJET_KEY in .env.
+//  🔧 The middleware expects req.user.role to
+//     be set by an auth middleware (not yet
+//     implemented — currently defaults to guest).
+// ─────────────────────────────────────────────
+
 import aj from '#config/Arcjet.js'
 import logger from '#config/logger.js'
 import {slidingWindow} from '@arcjet/node'

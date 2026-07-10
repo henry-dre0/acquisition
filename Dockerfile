@@ -1,3 +1,19 @@
+# ─────────────────────────────────────────────
+#  DOCKERFILE — multi-stage build
+# ─────────────────────────────────────────────
+#  Stages:
+#    base   → copies package.json only (shared)
+#    deps   → installs ALL dependencies
+#    dev    → deps + source code + hot-reload
+#    prod   → production deps only + source
+#
+#  🔧 Build for dev:
+#     docker compose -f docker-compose.dev.yml up
+#
+#  🔧 Build for prod:
+#     docker compose -f docker-compose.prod.yml up
+# ─────────────────────────────────────────────
+
 FROM node:24-alpine AS base
 WORKDIR /app
 COPY package*.json ./
