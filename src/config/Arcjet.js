@@ -27,7 +27,7 @@ const aj = arcjet({
       // See https://docs.arcjet.com/fingerprints
       //characteristics: ["ip.src"],
       
-      interval: '2', // Refill every 10 seconds
+      interval: '10s',
       max: 5 // Max 5 requests per interval
     }),
   ],
