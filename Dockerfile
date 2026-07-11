@@ -3,7 +3,7 @@
 # ─────────────────────────────────────────────
 #  Stages:
 #    base        → copies package.json, creates non-root user
-#    development → installs ALL deps + hot-reload
+#    development → installs ALL deps + hot-reload + HEALTHCHECK
 #    production  → installs only production deps + HEALTHCHECK
 #
 #  🔧 Build for dev:
@@ -39,6 +39,10 @@ RUN chown -R nodejs:nodejs /app
 USER nodejs
 
 EXPOSE 3000
+
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD node -e "require('http').get('http://localhost:3000/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) }).on('error', () => process.exit(1))"
+
 CMD ["node", "--watch", "src/index.js"]
 
 # ── PRODUCTION ────────────────────────────────
